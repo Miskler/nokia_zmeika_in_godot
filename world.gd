@@ -14,7 +14,6 @@ func _ready():
 var save_old = false
 func event():
 	#МОДУЛЬ НАПРАВЛЕНИЯ ДВИЖЕНИЯ
-	#$rot.look_at(snake[0]-snake[1])
 	if Input.is_action_pressed("ui_left"):
 		$rot.rotation_degrees -= 90
 	elif Input.is_action_pressed("ui_right"):
@@ -64,7 +63,7 @@ func event():
 			pos = Vector2(round(rand_range(game_zone.position.x, game_zone.size.x)),round(rand_range(game_zone.position.y, game_zone.size.y)))
 		
 		$map.set_cellv(pos, 2)
-	elif $map.get_cellv(new_snake[0]) in [-1, 0]:
+	elif not $map.get_cellv(new_snake[0]) in [-1, 0]:
 		$timer_event.stop()
 		$map.set_cellv(new_snake[0], 3)
 		$interface/box.game_over(new_snake.size())
