@@ -6,16 +6,17 @@ func game_over(snake_size:int):
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.5)
 
+onready var main = $"../.."
 func restart():
-	$"../..".snake = {0: Vector2(2, 2), 1: Vector2(1, 2)}
-	$"../..".save_old = false
-	$".".modulate.a = 0.0
-	$"../../timer_event".wait_time = 1
+	main.snake = {0: Vector2(2, 2), 1: Vector2(1, 2)}
+	main.save_old = false
+	modulate.a = 0.0
+	main.get_node("timer_event").wait_time = 1
 	
-	for i in $"../../map".get_used_cells():
-		if $"../../map".get_cellv(i) != 0:
-			$"../../map".set_cellv(i, -1)
-	$"../../map".set_cell(4, 2, 2)
-	$"../../rot".rotation_degrees = 0
+	for i in main.get_node("map").get_used_cells():
+		if main.get_node("map").get_cellv(i) != 0:
+			main.get_node("map").set_cellv(i, -1)
+	main.get_node("map").set_cell(4, 2, 2)
+	main.get_node("rot").rotation_degrees = 0
 	
-	$"../../timer_event".start()
+	main.get_node("timer_event").start()
